@@ -10,11 +10,7 @@ def findSumOfMeasurementsIncrease(aList):
     for i in range(len(aList)-2):
         total = aList[i] + aList[i+1] + aList[i+2]
         sumList.append(total)
-    count = 0
-    for i in range(len(sumList)-1):
-        if sumList[i] < sumList[i+1]:
-            count += 1
-    return count
+    return findDepthMeasurementIncrease(sumList)
 
 
 def main():
