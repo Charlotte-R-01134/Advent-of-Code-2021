@@ -20,7 +20,6 @@ def findSumOfMeasurementsIncrease(aList):
 def main():
     aList = [int(x) for x in open('Day 1\day 1.txt').read().splitlines()]
     print(findDepthMeasurementIncrease(aList))
-
     print(findSumOfMeasurementsIncrease(aList))
 
 main()
