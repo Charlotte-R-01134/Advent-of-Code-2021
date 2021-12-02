@@ -29,8 +29,7 @@ def main():
     commands = []
     nums = []
     for instruction in aList:
-        num = instruction[-1]
-        command = instruction[:-2]
+        command, num = instruction.split(" ")
         commands.append(command)
         nums.append(num)
     print(calculateHorizonalDepth(commands, nums))
