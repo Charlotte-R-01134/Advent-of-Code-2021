@@ -10,8 +10,22 @@ def calculateHorizonalDepth(commands, nums):
             depth -= int(nums[i])
     return horizontal*depth
 
+def calculateHorizontalDepthWithAim(commands, nums):
+    horizontal = 0
+    depth = 0
+    aim = 0
+    for i in range(len(commands)):
+        if commands[i] == "forward":
+            horizontal += int(nums[i])
+            depth += aim*int(nums[i])
+        elif commands[i] == "down":
+            aim += int(nums[i])
+        elif commands[i] == "up":
+            aim -= int(nums[i])
+    return horizontal*depth
 
-def stripString(aList):
+def main():
+    aList = [line.rstrip() for line in open('Day 2\day 2.txt')]
     commands = []
     nums = []
     for instruction in aList:
@@ -19,12 +33,8 @@ def stripString(aList):
         command = instruction[:-2]
         commands.append(command)
         nums.append(num)
-    return calculateHorizonalDepth(commands, nums)
-
-
-def main():
-    aList = [line.rstrip() for line in open('Day 2\day 2.txt')]
-    print(stripString(aList))
+    print(calculateHorizonalDepth(commands, nums))
+    print(calculateHorizontalDepthWithAim(commands, nums))
 
 main()
 
