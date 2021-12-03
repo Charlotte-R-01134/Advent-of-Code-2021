@@ -1,60 +1,73 @@
-from os import curdir
+def getPowerConsumptionRate(aList, gamma, epsilon, pos):
+    if pos == len(aList[0]):
+        return int(gamma, 2) * int(epsilon, 2)
 
+    posList = [item[pos] for item in aList]
+    num0 = posList.count("0")
+    num1 = posList.count("1")
 
-def calculateGammeAndEpsilon(aList):
-    gamma = ""
-    epsilon = ""
-    for str in aList:
-        counter = 0
-        num = aList[0]
-        for char in str:
-            cuur = str.count(char)
-            if cuur > counter:
-                counter = cuur
-                num = char
-        if num == "0":
-            gamma += "0"
-            epsilon += "1"
-        elif num == "1":
-            gamma += "1"
-            epsilon += "0"
-    return(int(gamma, 2) * int(epsilon, 2))
+    if num0 > num1:
+        gamma += "0"
+        epsilon += "1"
+    else:
+        gamma += "1"
+        epsilon += "0"
 
-def splitListIntoPositions(alist):
+    return getPowerConsumptionRate(aList, gamma, epsilon, pos+1)
 
-    pos0 = []
-    pos1 = []
-    pos2 = []
-    pos3 = []
-    pos4 = []
-    pos5 = []
-    pos6 = []
-    pos7 = []
-    pos8 = []
-    pos9 = []
-    pos10 = []
-    pos11 = []
+aList = [line.rstrip() for line in open('Day 3\day 3.txt')]
+gamma = ""
+epsilon = ""
+print(f"Power Consumption: {getPowerConsumptionRate(aList, gamma, epsilon, 0)}")
 
-    for str in alist:
-        pos0.append(str[0])
-        pos1.append(str[1])
-        pos2.append(str[2])
-        pos3.append(str[3])
-        pos4.append(str[4])
-        pos5.append(str[5])
-        pos6.append(str[6])
-        pos7.append(str[7])
-        pos8.append(str[8])
-        pos9.append(str[9])
-        pos10.append(str[10])
-        pos11.append(str[11])
+def getOxygen(aList, pos, currOxygen):
+    if len(aList) == 1:
+        return int(currOxygen[0], 2)
 
-    aList = [pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11]
+    posList = [item[pos] for item in aList]
+    num0 = posList.count("0")
+    num1 = posList.count("1")
+    oxygen = []
+    newList = []
 
-    return calculateGammeAndEpsilon(aList)
+    if num0 > num1:
+        for item in aList:
+            if item[pos] == "0":
+                oxygen.append(item)
+                newList.append(item)
 
-def main():
-    aList = [line.rstrip() for line in open('Day 3\day 3.txt')]
-    print(splitListIntoPositions(aList))
+    if num0 < num1 or num0 == num1:
+        for item in aList:
+            if item[pos] == "1":
+                oxygen.append(item)
+                newList.append(item)
 
-main()
+    return getOxygen(newList, pos+1, oxygen)
+
+def getCo2(aList, pos, currCo2):
+    if len(aList) == 1:
+        return int(currCo2[0], 2)
+
+    posList = [item[pos] for item in aList]
+    num0 = posList.count("0")
+    num1 = posList.count("1")
+    co2 = []
+    newList = []
+
+    if num0 < num1 or num0 == num1:
+        for item in aList:
+            if item[pos] == "0":
+                co2.append(item)
+                newList.append(item)
+
+    if num0 > num1:
+        for item in aList:
+            if item[pos] == "1":
+                co2.append(item)
+                newList.append(item)
+
+    return getCo2(newList, pos+1, co2)
+
+oxygen = []
+co2 = []
+print(f"Life supports: {getOxygen(aList, 0, oxygen) * getCo2(aList, 0, co2)}")
