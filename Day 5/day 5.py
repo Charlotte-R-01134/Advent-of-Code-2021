@@ -40,7 +40,28 @@ def addVent(grid, pos1, pos2):
             while x1<=x2:
                 grid[x1][y1] += 1
                 x1 += 1
-    return grid
+        # part 2
+        elif x1>x2 and y1>y2:
+            while x1>=x2:
+                grid[x1][y1] += 1
+                x1 -= 1
+                y1 -= 1
+        elif x1>x2 and y1<y2:
+            while x1>=x2:
+                grid[x1][y1] += 1
+                x1 -= 1
+                y1 += 1
+        elif x1<x2 and y1>y2:
+            while x1<=x2:
+                grid[x1][y1] += 1
+                x1 += 1
+                y1 -= 1
+        elif x1<x2 and y1<y2:
+            while x1<=x2:
+                grid[x1][y1] += 1
+                x1 += 1
+                y1 += 1
+        return grid
 
 def countOverlaps(grid):
     """Count the overlaping vent cells in the grid."""
