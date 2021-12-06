@@ -5,6 +5,8 @@ def getFish():
         listOfFish = [int(x) for x in data.split(',')]
     return listOfFish
 
+#part 1
+
 def runSimulation():
     listOfFish = getFish()
     for day in range(80):
@@ -18,3 +20,15 @@ def runSimulation():
 
 print(runSimulation())
 
+# part 2
+
+def simulate(listOfFish):
+    count = [listOfFish.count(i) for i in range(9)]
+    for day in range(256):
+        zeros = count[0]
+        count[:-1] = count[1:]
+        count[6] += zeros
+        count[8] = zeros
+    return sum(count)
+
+print(simulate(getFish()))
