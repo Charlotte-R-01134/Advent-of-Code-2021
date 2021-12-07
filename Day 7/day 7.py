@@ -19,3 +19,16 @@ def findMinFuelConsumption(listOfCrabPos):
 listOfCrabPos = getCrabPos()
 print(findMinFuelConsumption(listOfCrabPos))
 
+def getTriangularNumber(n):
+    return n*(n+1)//2
+
+def findMinFuelConsumptionWithExponentialGrowth(listOfCrabPos):
+    results = []
+    for point in range(0, max(listOfCrabPos)):
+        fuel = sum([getTriangularNumber(abs(crab-point)) for crab in listOfCrabPos])
+        results.append(fuel)
+    return min(results)
+
+listOfCrabPos = getCrabPos()
+print(findMinFuelConsumptionWithExponentialGrowth(listOfCrabPos))
+
